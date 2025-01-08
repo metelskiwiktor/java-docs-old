@@ -8,6 +8,7 @@ import java.util.Optional;
 import java.util.regex.Pattern;
 import java.util.Set;
 
+
 public class ProductValidator {
 
     private static final Pattern PRODUCT_CODE_PATTERN = Pattern.compile("^[A-Za-z0-9]{5,10}$");

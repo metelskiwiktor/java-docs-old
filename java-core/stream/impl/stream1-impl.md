@@ -106,5 +106,104 @@ public class MyStream<T> {
         }
         return Optional.of(elements.get(0));
     }
+
+    // Nowe metody z dokumentu:
+
+    // allMatch
+    public boolean allMatch(Predicate<T> predicate) {
+        for (T element : elements) {
+            if (!predicate.test(element)) {
+                return false;
+            }
+        }
+        return true;
+    }
+
+    // anyMatch
+    public boolean anyMatch(Predicate<T> predicate) {
+        for (T element : elements) {
+            if (predicate.test(element)) {
+                return true;
+            }
+        }
+        return false;
+    }
+
+    // noneMatch
+    public boolean noneMatch(Predicate<T> predicate) {
+        for (T element : elements) {
+            if (predicate.test(element)) {
+                return false;
+            }
+        }
+        return true;
+    }
+
+    // reduce
+    public T reduce(T identity, BinaryOperator<T> accumulator) {
+        T result = identity;
+        for (T element : elements) {
+            result = accumulator.apply(result, element);
+        }
+        return result;
+    }
+
+    // min
+    public Optional<T> min(Comparator<T> comparator) {
+        if (elements.isEmpty()) {
+            return Optional.empty();
+        }
+        T minElement = elements.get(0);
+        for (T element : elements) {
+            if (comparator.compare(element, minElement) < 0) {
+                minElement = element;
+            }
+        }
+        return Optional.of(minElement);
+    }
+
+    // max
+    public Optional<T> max(Comparator<T> comparator) {
+        if (elements.isEmpty()) {
+            return Optional.empty();
+        }
+        T maxElement = elements.get(0);
+        for (T element : elements) {
+            if (comparator.compare(element, maxElement) > 0) {
+                maxElement = element;
+            }
+        }
+        return Optional.of(maxElement);
+    }
+
+    // peek
+    public MyStream<T> peek(Consumer<T> action) {
+        for (T element : elements) {
+            action.accept(element);
+        }
+        return this;
+    }
+
+    // flatMap
+    public <R> MyStream<R> flatMap(Function<T, MyStream<R>> mapper) {
+        List<R> flatMappedElements = new ArrayList<>();
+        for (T element : elements) {
+            MyStream<R> mappedStream = mapper.apply(element);
+            flatMappedElements.addAll(mappedStream.toList());
+        }
+        return new MyStream<>(flatMappedElements);
+    }
+
+    // join
+    public String join(CharSequence delimiter) {
+        StringBuilder result = new StringBuilder();
+        for (int i = 0; i < elements.size(); i++) {
+            result.append(elements.get(i));
+            if (i < elements.size() - 1) {
+                result.append(delimiter);
+            }
+        }
+        return result.toString();
+    }
 }
 ```

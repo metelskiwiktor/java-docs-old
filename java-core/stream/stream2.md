@@ -40,7 +40,7 @@ System.out.println(hasEven);  // Wyjście: true
 
 ---
 
-### 3. Złożona operacja `allMatch`, `anyMatch`
+## 3. Złożona operacja `allMatch`, `anyMatch`
 
 **Opis:**  
 Używając metod `allMatch` i `anyMatch`, sprawdź, czy wszystkie liczby są parzyste oraz czy przynajmniej jedna liczba jest większa niż 10.
@@ -84,6 +84,19 @@ Metoda `reduce` agreguje elementy strumienia na podstawie operatora binarnego. P
 public T reduce(T identity, BinaryOperator<T> accumulator)
 ```
 
+**Interfejs `BinaryOperator` rozszerzający `BiFunction`:**
+```java
+@FunctionalInterface
+public interface BinaryOperator<T> extends BiFunction<T,T,T> {
+    
+}
+
+@FunctionalInterface
+public interface BiFunction<T, U, R> {
+    R apply(T t, U u);
+}
+```
+
 **Przykład użycia:**
 ```java
 List<Integer> numbers = Arrays.asList(1, 2, 3, 4);
@@ -94,7 +107,7 @@ System.out.println(sum);  // Wyjście: 10
 
 ---
 
-### 6. Złożona operacja `reduce`, `noneMatch`
+## 6. Złożona operacja `reduce`, `noneMatch`
 
 **Opis:**  
 Użyj metod `reduce` i `noneMatch`, aby zsumować liczby większe niż 10 i sprawdzić, czy żaden element nie jest mniejszy niż 5.
@@ -104,7 +117,7 @@ Użyj metod `reduce` i `noneMatch`, aby zsumować liczby większe niż 10 i spra
 
 **Oczekiwane wyjście:**
 - Suma: `49`
-- Wynik `noneMatch`: `false`
+- Wynik `noneMatch`: `true`
 
 ---
 
@@ -148,7 +161,7 @@ maxValue.ifPresent(System.out::println);  // Wyjście: 6
 
 ---
 
-### 9. Złożona operacja `min`, `max`, `reduce`
+## 9. Złożona operacja `min`, `max`, `reduce`
 
 **Opis:**  
 Użyj metod `min`, `max` oraz `reduce`, aby znaleźć minimalną, maksymalną oraz zsumowaną wartość z listy liczb.
@@ -189,7 +202,19 @@ stream.peek(System.out::println).toList();
 ## 11. flatMap
 
 **Opis:**  
-Metoda `flatMap` przekształca każdy element strumienia na inny strumień, a następnie "spłaszcza" wynik, łącząc wszystkie strumienie w jeden.
+Metoda `flatMap` w Javie służy do "spłaszczenia" złożonych struktur danych, takich jak lista list. W jej działaniu
+najpierw przekształca każdy element strumienia na inny strumień, a następnie łączy wszystkie te strumienie w jeden
+strumień. To oznacza, że zamiast uzyskać strumień strumieni, otrzymujemy jeden płaski strumień, co ułatwia operacje na
+danych.
+
+#### Wyjaśnienie krok po kroku:
+1. **Przekształcenie (mapowanie)**: Dla każdego elementu oryginalnego strumienia wykonujemy operację, która zwraca strumień lub strukturę danych. Dla przykładu: jeśli mamy listę list, każdą podlistę możemy przekształcić w osobny strumień.
+
+2. **Spłaszczenie**: Zamiast zwracać strumień strumieni (czyli zagnieżdżoną strukturę), `flatMap` spłaszcza je, tworząc pojedynczy strumień zawierający wszystkie elementy z każdej z podstruktur.
+
+
+#### Porównanie z `map`:
+Gdybyśmy użyli metody `map`, wynikiem byłaby lista strumieni, czyli bardziej złożona struktura, np. lista list. `flatMap` natomiast "rozplątuje" te struktury, tworząc płaski, jednowymiarowy strumień.
 
 **Sygnatura metody:**
 ```java
@@ -207,7 +232,7 @@ System.out.println(result);  // Wyjście: [1, 2, 3, 4]
 
 ---
 
-### 12. Złożona operacja `flatMap`, `peek`
+## 12. Złożona operacja `flatMap`, `peek`
 
 **Opis:**  
 Użyj `flatMap` i `peek`, aby spłaszczyć listę list liczb i wydrukować każdy element przed jego dodaniem do wyniku.

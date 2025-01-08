@@ -181,7 +181,7 @@ public class CounterThread extends Thread {
 
     @Override
     public void run() {
-        for(int i = 0; i < 1000; i++) {
+        for(int i = 0; i < 100000; i++) {
             counter.increment();
         }
     }
@@ -200,7 +200,6 @@ public class Main {
         t1.join();
         t2.join();
 
-        System.out.println("Oczekiwany wynik: 2000");
         System.out.println("Rzeczywisty wynik: " + counter.getCount());
     }
 }
@@ -316,7 +315,7 @@ Te klasy umożliwiają synchronizację i komunikację między wątkami w bardzie
 
 ---
 
-## **6. Przykład Producenta i Konsumenta (Bez `ExecutorService`, Tylko Czyste Wątki)**
+## **6. Przykład Producenta i Konsumenta (Bez `ExecutorService`)**
 
 ### **Opis Problemu**
 
@@ -450,6 +449,3 @@ W tym artykule omówiliśmy kluczowe aspekty wielowątkowości w Javie:
 5. **Synchronizacja Wątków**: Omówiliśmy różne metody synchronizacji, takie jak `synchronized`, `Lock`, czy zmienne atomowe.
 6. **Przykład Producenta i Konsumenta**: Przedstawiliśmy klasyczny problem synchronizacji wątków i jego rozwiązanie bez użycia zaawansowanych frameworków.
 
-Zrozumienie tych podstaw jest kluczowe dla pisania bezpiecznych i wydajnych aplikacji wielowątkowych. Zachęcam do eksperymentowania z przedstawionymi przykładami i dalszego zgłębiania tematu.
-
----

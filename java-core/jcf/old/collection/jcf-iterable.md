@@ -1,27 +1,5 @@
 # Java Collections Framework: Interfejsy `Iterator` i `Iterable`
 
-## Spis treści
-1. [Wprowadzenie](#wprowadzenie)
-2. [Interfejs `Iterable`](#interfejs-iterable)
-3. [Interfejs `Iterator`](#interfejs-iterator)
-4. [Implementacja `Iterator` w różnych kolekcjach](#implementacja-iterator-w-różnych-kolekcjach)
-5. [Operacje `Iterator`](#operacje-iterator)
-    - [Metoda `hasNext()`](#metoda-hasnext)
-    - [Metoda `next()`](#metoda-next)
-    - [Metoda `remove()`](#metoda-remove)
-    - [Metoda `forEachRemaining()`](#metoda-foreachremaining)
-6. [Tworzenie własnego iteratora](#tworzenie-własnego-iteratora)
-7. [Pułapki i błędy związane z iteracją](#pułapki-i-błędy-związane-z-iteracją)
-    - [`ConcurrentModificationException`](#concurrentmodificationexception)
-    - [Pomijanie wywołania metody `next()`](#pomijanie-wywołania-metody-next)
-    - [Bezpieczeństwo wątkowe](#bezpieczeństwo-wątkowe)
-8. [Przykłady kodu](#przykłady-kodu)
-9. [Pytania rekrutacyjne](#pytania-rekrutacyjne)
-    - [Pytania podstawowe](#pytania-podstawowe)
-    - [Pytania zaawansowane](#pytania-zaawansowane)
-
----
-
 ## Wprowadzenie
 
 Interfejsy `Iterator` i `Iterable` są kluczowymi elementami **Java Collections Framework**. Umożliwiają iterację po elementach kolekcji w sposób ujednolicony i niezależny od konkretnej implementacji kolekcji. Dzięki nim możemy łatwo przeglądać, modyfikować i usuwać elementy z kolekcji podczas iteracji.
@@ -334,7 +312,7 @@ Patrz sekcja [Tworzenie własnego iteratora](#tworzenie-własnego-iteratora).
     - `Iterable` to interfejs, który reprezentuje kolekcję dostarczającą `Iterator` poprzez metodę `iterator()`. `Iterator` to interfejs służący do iteracji po elementach tej kolekcji.
 
 3. **Jakie kolekcje w Javie implementują interfejs `Iterable`?**
-    - Wszystkie kolekcje z Java Collections Framework implementują `Iterable`, np. `List`, `Set`, `Queue`.
+    - Wszystkie kolekcje z Java Collections Framework implementujące `Collection`.
 
 4. **Dlaczego nie powinno się modyfikować kolekcji podczas iteracji przy użyciu pętli for-each?**
     - Ponieważ może to spowodować `ConcurrentModificationException`. Bezpieczne modyfikacje powinny być wykonywane bezpośrednio za pomocą iteratora.

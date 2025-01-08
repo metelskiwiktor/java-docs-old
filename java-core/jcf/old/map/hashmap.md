@@ -23,10 +23,9 @@
 
 **Klasa `Node` zawiera:**
 
-- **`int hash`**: Wartość haszująca klucza.
 - **`K key`**: Klucz.
 - **`V value`**: Wartość.
-- **`Node<K, V> next`**: Referencja do następnego węzła (w przypadku kolizji).
+- **`Node<K, V> next`**: Referencja do następnego węzła (wykorzystywana do kolizji hashu).
 
 ### Mechanizm działania
 
@@ -58,8 +57,8 @@ Hashowanie to proces przekształcania danych wejściowych (klucza) w wartość h
 **Obliczanie indeksu kubełka:**
 
 ```java
-int hash = key == null ? 0 : key.hashCode();
-int index = hash % capacity; // n to rozmiar tablicy
+int hash = key == null ? 0 : Math.abs(key.hashCode());
+int index = hash % capacity; // capacity to rozmiar tablicy
 ```
 
 ### Rozwiązywanie kolizji
@@ -101,7 +100,7 @@ Kolizja występuje, gdy dwa różne klucze dają ten sam indeks kubełka. `HashM
 
 | Właściwość              | `HashMap` z listami wiązanymi | `HashMap` z drzewami czerwono-czarnymi |
 |-------------------------|-------------------------------|----------------------------------------|
-| Złożoność wstawiania    | O(1)                          | O(log n)                               |
+| Złożoność wstawiania    | O(n)                          | O(log n)                               |
 | Złożoność wyszukiwania  | O(n)                          | O(log n)                               |
 | Zużycie pamięci         | Mniejsze                      | Większe                                |
 | Złożoność implementacji | Prostsza                      | Bardziej złożona                       |
